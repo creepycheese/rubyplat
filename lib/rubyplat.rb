@@ -1,5 +1,5 @@
 require "rubyplat/version"
-
+require 'date'
+require_relative 'rubyplat/requests/check'
 module Rubyplat
-  require_relative 'rubyplat/requests/check'
 end
