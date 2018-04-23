@@ -29,4 +29,20 @@ class Rubyplat::CheckTest < Minitest::Test
   def test_it_renders_session
     assert @check_request.body.include?('SESSION=sess')
   end
+
+  def test_it_does_not_render_number_when_not_present
+    refute @check_request.body.include?('NUMBER=333')
+  end
+
+  def test_it_renders_number_when_present
+    @check_request = Rubyplat::Requests::Check.new(
+      sender: 'sender',
+      receiver: 'receiver',
+      operator: 'operator',
+      date: Time.now,
+      session: 'sess',
+      number: 333)
+
+    assert @check_request.body.include?('NUMBER=333')
+  end
 end

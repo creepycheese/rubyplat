@@ -14,6 +14,7 @@ module Rubyplat
         @operator = params[:operator]
         @date = DateTime.parse((params[:date] || Time.now).to_s).strftime('%Y.%m.%d %H:%M:%S')
         @session = params[:session]
+        @number = params[:number]
       end
 
       # @return [String] String representation of request
