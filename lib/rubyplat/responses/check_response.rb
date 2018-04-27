@@ -7,6 +7,7 @@ module Rubyplat
         new(parse(response))
       end
 
+      # @param params [Hash] hash of params
       def initialize(params = {})
         @date = DateTime.parse(params.delete(:date))
 
