@@ -1,7 +1,7 @@
 module Rubyplat
   module Utils
     module Parser
-      # :nodoc:
+      # @param response_body [String] response from cyberplat api
       def parse(response_body)
         regex = /BEGIN\n(.*)END\n/m
         body = response_body.match(regex)[1].strip.split("\n")

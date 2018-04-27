@@ -13,7 +13,4 @@ class CheckResponseTest < Minitest::Test
     @response = Rubyplat::Responses::CheckResponse.from_response_string(@response_ok)
     assert @response.success?
   end
-
-  def test_it_checks_result_when_success
-  end
 end
