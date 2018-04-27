@@ -1,7 +1,6 @@
 module Rubyplat
   module Requests
-    class Check
-      InvalidPaytool = Class.new(StandardError)
+    class PaymentRequest
 
       # @param [Hash] params arguments to create request
       # @option [String] params :sender sender of request
@@ -25,33 +24,15 @@ module Rubyplat
         @account = params[:account]
         @amount = params[:amount]
         @req_type = params[:req_type]
-        @pay_tool = Rubyplat::PAYTOOL.fetch(params[:pay_tool]) { raise InvalidPaytool.new("Paytool может принимать значения #{PAYTOOL.keys}") }
+        @pay_tool = Rubyplat::PAYTOOL.fetch(params[:paytool]) { nil }
         @term_id = params[:term_id]
         @comment = params[:comment]
         @accept_keys = params[:accept_keys]
         @no_route = params[:no_route]
         @amount_all = params[:amount_all]
+        @rrn = params[:rrn]
       end
 
-      # @return [String] String representation of request
-      # @example
-      #   @check_request = Rubyplat::Requests::Check.new(
-      #     sender: 'sender',
-      #     receiver: 'receiver',
-      #     operator: 'operator',
-      #     date: Time.now,
-      #     session: 'sess',
-      #     account: 'account',
-      #     amount: 1234.42,
-      #     req_type: false,
-      #     term_id: '12345',
-      #     comment: 'FooBar',
-      #     accept_keys: '12345',
-      #     pay_tool: :cash,
-      #     no_route: true)
-      #
-      #   @check_request.body
-      #    #=> "SD=sender\r\nAP=receiver\r\nOP=operator\r\nDATE=2018.04.27 17:08:49\r\nSESSION=sess\r\nACCOUNT=account\r\nAMOUNT=1234.42\r\nREQ_TYPE=0\r\nPAY_TOOL=0\r\nTERM_ID=12345\r\nCOMMENT=FooBar\r\nACCEPT_KEYS=12345\r\nNO_ROUTE=1"
       def body
         body_parameters.compact.join("\r\n").encode(Encoding::WINDOWS_1251)
       end
@@ -78,6 +59,7 @@ module Rubyplat
           "COMMENT=#{@comment}",
           "ACCEPT_KEYS=#{@accept_keys}",
           "NO_ROUTE=#{@no_route ? 1 : 0}",
+          "RRN=#{@rrn}",
           "AMOUNT_ALL=#{@amount_all}"
         ]
       end
