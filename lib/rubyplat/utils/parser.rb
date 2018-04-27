@@ -1,7 +1,9 @@
 module Rubyplat
   module Utils
     module Parser
+
       # @param response_body [String] response from cyberplat api
+      # @return [Hash] hash of key value hashes
       def parse(response_body)
         regex = /BEGIN\n(.*)END\n/m
         body = response_body.match(regex)[1].strip.split("\n")
