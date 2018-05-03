@@ -6,10 +6,11 @@ module Rubyplat
       # @return [Hash] hash of key value hashes
       def parse(response_body)
         regex = /BEGIN\n(.*)END\n/m
-        body = response_body.match(regex)[1].strip.split("\n")
+        require 'pry'; binding.pry if response_body.include?('DATA')
+        body = response_body.match(regex)[1].scan(/(?<key>.*)=(?<value>.*)\n/)
         params = {}
         body.each do |param|
-          k,v = param.split('=')
+          k,v = param
           params[k.strip.downcase.to_sym] = v
         end
         params

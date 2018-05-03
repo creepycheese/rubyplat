@@ -1,5 +1,5 @@
 # Rubyplat
-Gem currently implements the following methods: *Payment Permission*, *Payment Request* and *Payment Status*
+Wrapper for cyberplat payment provider. Uses FFI to call Cyberpat Ipriv library for signing requests.
 
 TODO: Config
 TODO: How to compile lib
