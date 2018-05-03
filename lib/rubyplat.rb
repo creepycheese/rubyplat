@@ -7,6 +7,7 @@ require_relative 'rubyplat/requests/payment_status'
 require_relative 'rubyplat/responses/response'
 require_relative 'rubyplat/responses/check_response'
 require_relative 'rubyplat/responses/payment_response'
+require_relative 'rubyplat/responses/payment_status_response'
 
 module Rubyplat
   InvalidPaytool = Class.new(StandardError)
