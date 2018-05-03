@@ -9,7 +9,7 @@ class CheckResponseTest < Minitest::Test
     assert_equal 0, @response.result.to_i
   end
 
-  def it_should_be_success
+  def test_it_should_be_success
     @response = Rubyplat::Responses::CheckResponse.from_response_string(@response_ok)
     assert @response.success?
   end
