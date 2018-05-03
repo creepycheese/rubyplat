@@ -9,7 +9,7 @@ module Rubyplat
 
       # @param params [Hash] hash of params
       def initialize(params = {})
-        @date = DateTime.parse(params.delete(:date))
+        @date = DateTime.parse(params.delete(:date)) if params[:date]
 
         params.each do |k,v|
           instance_variable_set("@#{k}", v)

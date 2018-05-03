@@ -12,7 +12,6 @@ module Rubyplat
           k,v = param.split('=')
           params[k.strip.downcase.to_sym] = v
         end
-
         params
       end
     end

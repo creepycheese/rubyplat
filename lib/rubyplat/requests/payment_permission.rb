@@ -1,6 +1,6 @@
 module Rubyplat
   module Requests
-    class Check
+    class PaymentPermission
       InvalidPaytool = Class.new(StandardError)
 
       # @param [Hash] params arguments to create request

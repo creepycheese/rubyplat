@@ -43,18 +43,6 @@ class Rubyplat::PaymentRequestTest < Minitest::Test
     refute @check_request.body.include?('NUMBER=333')
   end
 
-  def test_it_renders_number_when_present
-    @check_request = Rubyplat::Requests::Check.new(
-      sender: 'sender',
-      receiver: 'receiver',
-      operator: 'operator',
-      date: Time.now,
-      session: 'sess',
-      number: 333,
-      pay_tool: :cash)
-
-    assert @check_request.body.include?('NUMBER=333')
-  end
 
   def test_it_renders_account_when_given
     assert @check_request.body.include?('ACCOUNT=account')
@@ -68,35 +56,6 @@ class Rubyplat::PaymentRequestTest < Minitest::Test
     assert @check_request.body.include?('REQ_TYPE=0')
   end
 
-  def test_it_renders_req_type_to_one_when_true
-    @check_request = Rubyplat::Requests::Check.new(
-      sender: 'sender',
-      receiver: 'receiver',
-      operator: 'operator',
-      date: Time.now,
-      session: 'sess',
-      account: 'account',
-      amount: 1234.42,
-      req_type: true,
-      pay_tool: :cash)
-
-    assert @check_request.body.include?('REQ_TYPE=1')
-  end
-
-  def test_it_renders_paytool_for_local_card
-    @check_request = Rubyplat::Requests::Check.new(
-      sender: 'sender',
-      receiver: 'receiver',
-      operator: 'operator',
-      date: Time.now,
-      session: 'sess',
-      account: 'account',
-      amount: 1234.42,
-      req_type: false,
-      pay_tool: :local_card)
-
-    assert @check_request.body.include?('PAY_TOOL=1')
-  end
 
   def test_it_renders_term_id
     assert @check_request.body.include?('TERM_ID=12345')

@@ -1,8 +1,8 @@
 require "test_helper"
 
-class Rubyplat::CheckTest < Minitest::Test
+class Rubyplat::PaymentPermissionTest < Minitest::Test
   def setup
-    @check_request = Rubyplat::Requests::Check.new(
+    @check_request = Rubyplat::Requests::PaymentPermission.new(
       sender: 'sender',
       receiver: 'receiver',
       operator: 'operator',
@@ -44,7 +44,7 @@ class Rubyplat::CheckTest < Minitest::Test
   end
 
   def test_it_renders_number_when_present
-    @check_request = Rubyplat::Requests::Check.new(
+    @check_request = Rubyplat::Requests::PaymentPermission.new(
       sender: 'sender',
       receiver: 'receiver',
       operator: 'operator',
@@ -69,7 +69,7 @@ class Rubyplat::CheckTest < Minitest::Test
   end
 
   def test_it_renders_req_type_to_one_when_true
-    @check_request = Rubyplat::Requests::Check.new(
+    @check_request = Rubyplat::Requests::PaymentPermission.new(
       sender: 'sender',
       receiver: 'receiver',
       operator: 'operator',
@@ -84,7 +84,7 @@ class Rubyplat::CheckTest < Minitest::Test
   end
 
   def test_it_renders_paytool_for_local_card
-    @check_request = Rubyplat::Requests::Check.new(
+    @check_request = Rubyplat::Requests::PaymentPermission.new(
       sender: 'sender',
       receiver: 'receiver',
       operator: 'operator',
