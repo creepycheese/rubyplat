@@ -3,34 +3,14 @@ module Rubyplat
     class PaymentStatus
 
       # @param [Hash] params arguments to create request
-      # @option [String] params :sender sender of request
-      # @option [String] params :receiver request receiver
-      # @option [String] params :operator operator
-      # @option [String] params :date request date
-      # @option [String] params :session session
-      # @option [String] params :number phone number or payer's account number(can be blank)
-      # @option [String] params :account payer's identifier or payees service identifier. Can be blank.
-      # @option [Float] params :amount amount to be payed. example: 1234.12
+      # @option [String] params :session 1-20 symbols session identifier
+      # @option [String] params :transid 13-digits payment identifier for Cyberplat(not required)
+      # @option [String] params :accept_keys serial key number
       #
       def initialize(params = {})
-        params = defaults.merge(params)
-
-        @sender = params[:sender]
-        @receiver = params[:receiver]
-        @operator = params[:operator]
-        @date = DateTime.parse((params[:date] || Time.now).to_s).strftime('%Y.%m.%d %H:%M:%S')
         @session = params[:session]
-        @number = params[:number]
-        @account = params[:account]
-        @amount = params[:amount]
-        @req_type = params[:req_type]
-        @pay_tool = Rubyplat::PAYTOOL.fetch(params[:paytool]) { nil }
-        @term_id = params[:term_id]
-        @comment = params[:comment]
+        @transid = params[:transid]
         @accept_keys = params[:accept_keys]
-        @no_route = params[:no_route]
-        @amount_all = params[:amount_all]
-        @rrn = params[:rrn]
       end
 
       def body
@@ -39,14 +19,11 @@ module Rubyplat
 
       private
 
-      def defaults
-        { pay_tool: 0, no_route: false }
-      end
-
       def body_parameters
         [
-          "SESSION=#{@sender}",
-          "ACCEPT_KEYS=#{@receiver}"
+          "SESSION=#{@session}",
+          @transid && "TRANSID=#{@transid}",
+          "ACCEPT_KEYS=#{@accept_keys}"
         ]
       end
     end
