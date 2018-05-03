@@ -19,9 +19,17 @@ module Rubyplat
       end
 
       # amount of daily available funds
-      # @return [Float] AP_DAILY_LIMIT
+      # @return [Float] AP_DAILY_LIMIT if set
+      # @return [nil] if not set
       def daily_limit
-        Float(@ap_daily_limit)
+        @ap_daily_limit && Float(@ap_daily_limit)
+      end
+
+      # maximum amount be paid with single payment
+      # @return [Float] AP_DAILY_LIMIT if set
+      # @return [nil] if not set
+      def max_payment_limit
+        @ap_payment_limit && Float(@ap_payment_limit)
       end
     end
   end

@@ -18,4 +18,9 @@ class CheckBalanceResponseTest < Minitest::Test
     @response = Rubyplat::Responses::CheckBalanceResponse.from_response_string(@response_ok)
     assert_equal 77342.43, @response.available_limit
   end
+
+  def test_it_parses_max_payment_limit
+    @response = Rubyplat::Responses::CheckBalanceResponse.from_response_string(@response_ok)
+    assert_equal 30000.00, @response.max_payment_limit
+  end
 end
