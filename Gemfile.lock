@@ -1,12 +1,16 @@
 PATH
   remote: .
   specs:
-    rubyplat (0.1.0)
+    rubyplat (0.1.1)
+      cyberplat_pki_patched (~> 1.0, >= 1.0.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.2)
+    cyberplat_pki_patched (1.0.1)
+      ffi
+    ffi (1.9.23)
     method_source (0.9.0)
     minitest (5.11.3)
     pry (0.11.3)

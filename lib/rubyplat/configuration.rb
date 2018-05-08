@@ -14,5 +14,17 @@ module Rubyplat
     def public_key=(key_path)
       @public_key = File.read(key_path)
     end
+
+    # secret key used for signing requests
+    # @return [CyberplatPKI::Key] an instance of key
+    def key
+      @key ||= CyberplatPKI::Key.new_private(secret_key, secret_passphrase)
+    end
+
+    # public key used for verifying requests
+    # @return [CyberplatPKI::Key] an instance of key
+    def pubkey
+      @pubkey ||= CyberplatPKI::Key.new_public(public_key, public_passphrase)
+    end
   end
 end

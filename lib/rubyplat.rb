@@ -1,4 +1,5 @@
 require "rubyplat/version"
+require 'cyberplat_pki'
 require 'date'
 require_relative 'rubyplat/utils/parser'
 require_relative 'rubyplat/configuration'
