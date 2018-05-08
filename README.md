@@ -24,7 +24,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Confiuration
+
+In your initializer configure keys for signing and verifying requests
+
+```ruby
+ # rubyplat.rb
+
+ Rubyplat.configure do |config|
+   config.secret_key = '/path/to_key'
+   config.public_key = '/path/to_key'
+ end
+
+```
 
 ## Development
 
