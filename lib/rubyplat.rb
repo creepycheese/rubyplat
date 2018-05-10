@@ -3,6 +3,7 @@ require 'cyberplat_pki'
 require 'date'
 require_relative 'rubyplat/utils/parser'
 require_relative 'rubyplat/configuration'
+require_relative 'rubyplat/signed_request'
 
 require_relative 'rubyplat/requests/payment_permission'
 require_relative 'rubyplat/requests/payment_request'
