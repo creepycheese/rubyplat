@@ -30,4 +30,12 @@ class ConfigruationTest < Minitest::Test
 
     assert 'very_secret', @config.public_passphrase
   end
+
+  def test_it_loads_keys
+    @config.secret_passphrase = '1111111111'
+    secret_key_path = File.expand_path '../keys/secret.key', __FILE__
+    @config.secret_key = secret_key_path
+
+    assert_kind_of CyberplatPKI::Key, @config.key
+  end
 end
