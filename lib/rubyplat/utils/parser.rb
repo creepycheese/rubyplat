@@ -5,8 +5,8 @@ module Rubyplat
       # @param response_body [String] response from cyberplat api
       # @return [Hash] hash of key value hashes
       def parse(response_body)
-        regex = /BEGIN\n(.*)END\n/m
-        body = response_body.match(regex)[1].scan(/(?<key>.*)=(?<value>.*)\n/)
+        regex = /BEGIN\r\n(.*)END\r\n/m
+        body = response_body.match(regex)[1].scan(/(?<key>.*)=(?<value>.*)\r\n/)
         params = {}
         body.each do |param|
           k,v = param

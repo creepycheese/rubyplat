@@ -8,7 +8,8 @@ module Rubyplat
     # @param key [CyberplatPKI::Key] secret key to sign request
     # @return [String] signed request body
     def sign(key)
-      key.sign(request.body)
+      msg = 'inputmessage='
+      msg << URI.encode(key.sign(request.body))
     end
 
     private

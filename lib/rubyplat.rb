@@ -1,9 +1,13 @@
 require "rubyplat/version"
 require 'cyberplat_pki'
 require 'date'
+require 'net/http'
 require_relative 'rubyplat/utils/parser'
 require_relative 'rubyplat/configuration'
 require_relative 'rubyplat/signed_request'
+require_relative 'rubyplat/client'
+
+require_relative 'rubyplat/gateways/gateway'
 
 require_relative 'rubyplat/requests/payment_permission'
 require_relative 'rubyplat/requests/payment_request'
@@ -36,3 +40,4 @@ module Rubyplat
     yield config
   end
 end
+

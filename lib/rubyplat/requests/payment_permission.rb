@@ -3,15 +3,15 @@ module Rubyplat
     class PaymentPermission
       InvalidPaytool = Class.new(StandardError)
 
-      # @param [Hash] params arguments to create request
-      # @option [String] params :sender sender of request
-      # @option [String] params :receiver request receiver
-      # @option [String] params :operator operator
-      # @option [String] params :date request date
-      # @option [String] params :session session
-      # @option [String] params :number phone number or payer's account number(can be blank)
-      # @option [String] params :account payer's identifier or payees service identifier. Can be blank.
-      # @option [Float] params :amount amount to be payed. example: 1234.12
+      # @param params [Hash] arguments to create request
+      # @option params [String] :sender sender of request
+      # @option params [String] :receiver request receiver
+      # @option params [String] :operator operator
+      # @option params [String] :date request date
+      # @option params [String] :session session
+      # @option params [String] :number phone number or payer's account number(can be blank)
+      # @option params [String] :account payer's identifier or payees service identifier. Can be blank.
+      # @option params [Float] :amount amount to be payed. example: 1234.12
       #
       def initialize(params = {})
         params = defaults.merge(params)

@@ -1,7 +1,7 @@
 class RefillInfoResponseTest < Minitest::Test
   def setup
     fixture_path =  File.expand_path '../../fixtures/refill_info_response.txt', __FILE__
-    @response_ok = File.read(fixture_path)
+    @response_ok = File.read(fixture_path).gsub("\n", "\r\n")
   end
 
   def test_it_parses_response
