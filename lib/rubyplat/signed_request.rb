@@ -10,6 +10,7 @@ module Rubyplat
     def sign(key)
       msg = 'inputmessage='
       msg << URI.encode(key.sign(request.body))
+      msg.encode(Encoding::WINDOWS_1251)
     end
 
     private

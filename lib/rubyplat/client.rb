@@ -27,13 +27,7 @@ module Rubyplat
       request = Rubyplat::Requests::PaymentPermission.new(params)
       response = send_request(request, uri)
 
-      if response.code == '200'
-        raise InvalidSignature unless pubkey.verify(response.body)
-
-        Rubyplat::Responses::PaymentPermissionResponse.from_response_string(response.body)
-      else
-        request
-      end
+      read_response(response, Rubyplat::Responses::PaymentPermissionResponse)
     end
 
     def pay
@@ -48,8 +42,14 @@ module Rubyplat
 
     attr_reader :pubkey, :key
 
-    def read_response(response_klass)
+    def read_response(response, response_klass)
+      if response.code == '200'
+        raise InvalidSignature unless pubkey.verify(response.body)
 
+        response_klass.from_response_string(response.body)
+      else
+        response
+      end
     end
 
     # sends signed request and returns parsed cyberplat response
