@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Gem for creating Cyberplat Payment System Requests}
   spec.description   = %q{Cyberplat wrapper}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/creepycheese/rubyplat"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
