@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubyplat (0.1.2)
+    rubyplat (0.1.3)
       cyberplat_pki_patched (~> 1.0, >= 1.0.1)
 
 GEM
