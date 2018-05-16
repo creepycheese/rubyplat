@@ -52,11 +52,6 @@ class Rubyplat::PaymentRequestTest < Minitest::Test
     assert @check_request.body.include?('AMOUNT=1234.42')
   end
 
-  def test_it_renders_req_type_zero_when_false
-    assert @check_request.body.include?('REQ_TYPE=0')
-  end
-
-
   def test_it_renders_term_id
     assert @check_request.body.include?('TERM_ID=12345')
   end

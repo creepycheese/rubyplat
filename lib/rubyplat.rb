@@ -40,4 +40,3 @@ module Rubyplat
     yield config
   end
 end
-

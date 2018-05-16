@@ -1,11 +1,6 @@
 # Rubyplat
 Wrapper for cyberplat payment provider. Uses FFI to call Cyberpat Ipriv library for signing requests.
 
-TODO: Config
-TODO: How to compile lib
-TODO: Caveeats
-TODO: API and usage
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -32,7 +27,32 @@ In your initializer configure keys for signing and verifying requests
  Rubyplat.configure do |config|
    config.secret_key = '/path/to_key'
    config.public_key = '/path/to_key'
+   config.secret_passphrase = 'secret'
+   config.public_passphrase = 123123
  end
+```
+
+Perform request
+
+```
+client = Rubyplat::Client.new
+
+params = {
+  sender: '123123',
+  receiver: '123123',
+  operator: '123123',
+  accept_keys: 123123,
+  date: Date.today,
+  session: SecureRandom.hex[0..20],
+  number: '12312312312',
+  amount: '300.30',
+  pay_tool: :foreign_card
+}
+
+client.pay_check(pay_params, 'https://ru-demo.cyberplat.com/cgi-bin/test_gate/utest_pay.cgi/es/es_pay.cgi')
+ # => #<Rubyplat::Responses::PaymentPermissionResponse:0x000
+client.pay(pay_params, 'https://ru-demo.cyberplat.com/cgi-bin/test_gate/utest_pay.cgi/es/es_pay.cgi')
+ # => #<Rubyplat::Responses::PaymentResponse:0x000
 ```
 
 ## Development
