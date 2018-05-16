@@ -20,7 +20,7 @@ module Rubyplat
     # @param vendor_or_uri [String, Rubyplat::Gateways::Gateway] string or gateway for cyberplat
     # @return [Rubyplat::Responses::PaymentPermissionResponse] response
     # @return [Net::HTTPBadRequest] instance of bad request
-    # @raise [AccountBalanceError] if the response signature is invalid
+    # @raise [Rubyplat::Client::InvalidSignature] if the response signature is invalid
     #   raises error
     def pay_check(params = {}, vendor_or_uri)
       uri = vendor_or_uri.kind_of?(String) ? URI(vendor_or_uri) : vendor_or_uri.pay_check_uri
@@ -30,12 +30,20 @@ module Rubyplat
       read_response(response, Rubyplat::Responses::PaymentPermissionResponse)
     end
 
-    def pay
+    def pay(params = {}, vendor_or_uri)
+      uri = vendor_or_uri.kind_of?(String) ? URI(vendor_or_uri) : vendor_or_uri.pay_check_uri
+      request = Rubyplat::Requests::PaymentRequest.new(params)
+      response = send_request(request, uri)
 
+      read_response(response, Rubyplat::Responses::PaymentResponse)
     end
 
-    def pay_status
+    def pay_status(params = {}, vendor_or_uri)
+      uri = vendor_or_uri.kind_of?(String) ? URI(vendor_or_uri) : vendor_or_uri.pay_check_uri
+      request = Rubyplat::Requests::PaymentStatus.new(params)
+      response = send_request(request, uri)
 
+      read_response(response, Rubyplat::Responses::PaymentStatusResponse)
     end
 
     private

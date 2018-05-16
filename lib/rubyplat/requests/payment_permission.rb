@@ -11,7 +11,10 @@ module Rubyplat
       # @option params [String] :session session
       # @option params [String] :number phone number or payer's account number(can be blank)
       # @option params [String] :account payer's identifier or payees service identifier. Can be blank.
+      # @option params [Float] :req_type if 1 -- simply check number without payment
       # @option params [Float] :amount amount to be payed. example: 1234.12
+      # @option params [String] :term_id actual sender code(Only for MTS and Beeline)
+      # @option params [Bool] :no_route auto redirect sign
       #
       def initialize(params = {})
         params = defaults.merge(params)
@@ -74,7 +77,7 @@ module Rubyplat
           "AMOUNT=#{@amount}",
           "REQ_TYPE=#{@req_type ? 1 : 0}",
           "PAY_TOOL=#{@pay_tool}",
-          "TERM_ID=#{@term_id}",
+          @term_id && "TERM_ID=#{@term_id}",
           "COMMENT=#{@comment}",
           "ACCEPT_KEYS=#{@accept_keys}",
           "NO_ROUTE=#{@no_route ? 1 : 0}",

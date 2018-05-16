@@ -9,8 +9,8 @@ module Rubyplat
     # @return [String] signed request body
     def sign(key)
       msg = 'inputmessage='
-      msg << URI.encode(key.sign(request.body))
-      msg.encode(Encoding::WINDOWS_1251)
+      msg << URI.encode(key.sign(request.body).encode(Encoding::WINDOWS_1251))
+      msg
     end
 
     private

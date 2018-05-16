@@ -6,11 +6,19 @@ module Rubyplat
       # @option params [String] :sender sender of request
       # @option params [String] :receiver request receiver
       # @option params [String] :operator operator
-      # @option params [String] :date request date
       # @option params [String] :session session
       # @option params [String] :number phone number or payer's account number(can be blank)
       # @option params [String] :account payer's identifier or payees service identifier. Can be blank.
       # @option params [Float] :amount amount to be payed. example: 1234.12
+      # @option params [Float] :amount_all amount to be charged. example: 1234.12
+      # @option params [Date] :date request date
+      # @option params [Float] :req_type amount to be payed. example: 1234.12
+      # @option params [Symbol] :pay_tool payment method [:cash, :local_card, :foreign_card]
+      # @option params [String] :term_id  actual sender code(Only for MTS and Beeline)
+      # @option params [String] :comment payment comment
+      # @option params [String] :rrn uniq payment identifier
+      # @option params [String] :accept_keys serial number of key to sign request
+      # @option params [Bool] :no_route auto redirect sign
       #
       def initialize(params = {})
         params = defaults.merge(params)
@@ -23,7 +31,6 @@ module Rubyplat
         @number = params[:number]
         @account = params[:account]
         @amount = params[:amount]
-        @req_type = params[:req_type]
         @pay_tool = Rubyplat::PAYTOOL.fetch(params[:paytool]) { nil }
         @term_id = params[:term_id]
         @comment = params[:comment]
@@ -53,7 +60,6 @@ module Rubyplat
           @number && "NUMBER=#{@number}",
           "ACCOUNT=#{@account}",
           "AMOUNT=#{@amount}",
-          "REQ_TYPE=#{@req_type ? 1 : 0}",
           "PAY_TOOL=#{@pay_tool}",
           "TERM_ID=#{@term_id}",
           "COMMENT=#{@comment}",
