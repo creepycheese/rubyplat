@@ -34,7 +34,7 @@ In your initializer configure keys for signing and verifying requests
 
 Perform request
 
-```
+```ruby
 client = Rubyplat::Client.new
 
 params = {
