@@ -62,14 +62,14 @@ module Rubyplat
 
     # sends signed request and returns parsed cyberplat response
     # request [#body] cyberplat request to be signed and sent
-    def send_request(request, uri)
-      signed_request_body = Rubyplat::SignedRequest.new(request).sign(key)
+    def send_request(rq, uri)
+      signed_request_body = Rubyplat::SignedRequest.new(rq).sign(key)
 
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       header = { 'Content-Type': 'application/x-www-form-urlencoded' }
       request = Net::HTTP::Post.new(uri.request_uri, header)
-      request.body = signed_request_body
+      request.body = signed_request_body.encode(Encoding::WINDOWS_1251)
 
       response = http.request(request)
     end

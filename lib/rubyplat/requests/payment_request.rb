@@ -26,7 +26,7 @@ module Rubyplat
         @sender = params[:sender]
         @receiver = params[:receiver]
         @operator = params[:operator]
-        @date = DateTime.parse((params[:date] || Time.now).to_s).strftime('%Y.%m.%d %H:%M:%S')
+        @date = DateTime.parse((params[:date] || Time.now).to_s).strftime('%Y.%m.%d %H:%M:%S') if params[:date]
         @session = params[:session]
         @number = params[:number]
         @account = params[:account]
@@ -52,21 +52,21 @@ module Rubyplat
 
       def body_parameters
         [
-          "SD=#{@sender}",
-          "AP=#{@receiver}",
-          "OP=#{@operator}",
-          "DATE=#{@date}",
-          "SESSION=#{@session}",
+          @sender && "SD=#{@sender}",
+          @receiver && "AP=#{@receiver}",
+          @operator && "OP=#{@operator}",
+          ("DATE=#{@date}" if @date),
+          @session && "SESSION=#{@session}",
           @number && "NUMBER=#{@number}",
-          "ACCOUNT=#{@account}",
-          "AMOUNT=#{@amount}",
-          "PAY_TOOL=#{@pay_tool}",
-          "TERM_ID=#{@term_id}",
-          "COMMENT=#{@comment}",
-          "ACCEPT_KEYS=#{@accept_keys}",
-          "NO_ROUTE=#{@no_route ? 1 : 0}",
-          "RRN=#{@rrn}",
-          "AMOUNT_ALL=#{@amount_all}"
+          @account && "ACCOUNT=#{@account}",
+          @amount && "AMOUNT=#{@amount}",
+          @pay_tool && "PAY_TOOL=#{@pay_tool}",
+          @term_id && "TERM_ID=#{@term_id}",
+          @comment && "COMMENT=#{@comment}",
+          @accept_keys && "ACCEPT_KEYS=#{@accept_keys}",
+          ("NO_ROUTE=#{@no_route ? 1 : 0}" if @no_route),
+          @rrn && "RRN=#{@rrn}",
+          @amount_all && "AMOUNT_ALL=#{@amount_all}"
         ]
       end
     end
